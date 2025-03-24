@@ -1,0 +1,17 @@
+{
+  "name": "br-role-analysis",
+  "version": "1.0.0",
+  "description": "分析BR合约角色事件的脚本",
+  "main": "role-analyzer.js",
+  "scripts": {
+    "analyze": "node role-analyzer.js",
+    "visualize": "node visualize-roles.js",
+    "all": "node analyze-all.js",
+    "check": "node check-address.js"
+  },
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "web3": "^1.10.0",
+    "dotenv": "^16.0.3"
+  }
+} 
