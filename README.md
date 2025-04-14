@@ -38,6 +38,9 @@ CONTRACT_ADDRESS=0xFf7d6A96ae471BbCD7713aF9CB1fEeB16cf56B41,0xD8A792E6C447980525
 # RPC节点URL
 RPC_URL=https://your-rpc-endpoint.com/
 
+# 区块链网络ID
+CHAIN_ID=1    # 以太坊主网=1，BSC=56，Polygon=137，Arbitrum=42161等
+
 # 分析控制
 START_BLOCK=47388486    # 开始分析的区块号
 FORCE_REANALYSIS=false  # 是否强制重新分析

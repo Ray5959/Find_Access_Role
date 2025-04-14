@@ -646,17 +646,26 @@ async function main() {
     
     // 连接到区块链
     log("正在连接到区块链...", 'step');
-    // 创建provider时禁用ENS
+    // 创建provider时从环境变量读取chainId
     const providerOptions = {
       ensDisabled: true, // 禁用ENS解析
-      chainId: 56, // BSC主网链ID
     };
+    
+    // 如果环境变量中设置了CHAIN_ID，则使用它
+    if (process.env.CHAIN_ID) {
+      providerOptions.chainId = parseInt(process.env.CHAIN_ID);
+      providerOptions.name = process.env.NETWORK_NAME || `network-${process.env.CHAIN_ID}`;
+      log(`使用环境变量中配置的链ID: ${providerOptions.chainId}, 网络名称: ${providerOptions.name}`, 'info');
+    }
+    
     const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL, providerOptions);
     
     try {
-      // 测试连接
+      // 测试连接并获取网络信息
+      const network = await provider.getNetwork();
       const currentBlockNumber = await provider.getBlockNumber();
-      log(`成功连接到区块链，当前区块高度: ${currentBlockNumber}`, 'success');
+      
+      log(`成功连接到区块链，网络名称: ${network.name}, 链ID: ${network.chainId}, 当前区块高度: ${currentBlockNumber}`, 'success');
       
       // 当前分析的合约地址
       const contractAddress = process.env.TARGET_ADDRESS || CURRENT_ADDRESS;
